@@ -1,0 +1,82 @@
+1) express <projectName> --hbs 
+
+2) cd to <projectName> 
+
+3) code . 
+
+4) npm install     #to install all dependencies 
+
+5) create .bowerrc file for bootstrap and JQuery 
+	add {
+    		"directory": "public/bower_components"
+	    } 
+
+6) install bootstrap & jqeuery 
+	bower install bootstrap jquery
+
+7) add     
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+to layoyt.hbs to use bootstrap 
+
+8) Start your happy coding in index.hbs   ^_^ 
+
+
+9) install mongoose for mongoDB => npm install --save mongoose 
+
+10) in app.js, const mongoose = require('mongoose')
+
+11) connect to mongoDB before the line of routing 
+mongoose.connect('mongodb://localhost/ECommerce',{seNewUrlParser:true},(error)=>{
+  if(error){
+    console.log(error)
+  }
+  else{
+    console.log('connected to Database')
+  }
+})
+
+12) create models folder for DB schema and products.js inside it
+
+13) require mongoose inside products.js
+
+14) create ProductSchema 
+const ProductSchema = mongoose.Schema({
+	Name: {
+		type:String,
+		required: true
+	      }
+})
+
+15) export your schema 
+module.exports = mongoos.model('Product',ProductSchema)
+
+16) create init folder & ProductInit.js
+
+17) require schema product 
+const Product = require('../model/product.js');
+then fill the db manually 
+
+18)require the data to index.js
+const Product = require('../models/Product') 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

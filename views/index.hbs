@@ -1,0 +1,31 @@
+
+{{#each items }}
+    <div class="row">
+        {{#each this}}
+            <div class="col-sm-4">
+                <div class="card" style="width: 80%">
+                    <div class="text-center image">
+                        <img src={{this.imagePath}} class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.productName}}</h5>
+                        <p class="card-text">
+                            Year: {{this.info.year}} <br>
+                            Make: {{this.info.make}} <br>
+                            Model: {{this.info.model}} <br>
+                            Type: {{this.info.carType}} <br>
+                        </p>
+                        <hr>
+                        <div class="btnPrice-div">
+                            <div class="price float-left">
+                                ${{this.price}}
+                            </div>
+                            <a href="#" class="btn btn-success float-right">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/each}}
+
