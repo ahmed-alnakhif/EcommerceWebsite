@@ -4,7 +4,7 @@
 
 3) code . 
 
-4) npm install     #to install all dependencies 
+4) npm install   #to install all dependencies 
 
 5) create .bowerrc file for bootstrap and JQuery 
 	add {
@@ -68,16 +68,50 @@ User Sign up & Auth
 
 21) inside route folder and users.js, add your routing for any CRUD method 
 
+22) download express validator => npm install --save express-validator 
 
+23) require express validator in app.js **the new express version works differently; it returns an object that has two functions 
+=> require express validator in users.js instead => const {check,validationResult} = require('express-validator) 
 
+24) the check function is an array that has all errors inside. it's placed after '/signup' rout in .post 
+=> rouer.post('signup', [],(req,res,next)=>{}) 
 
+25) the results of the check function are saved in the validationResult function
+=> so we save it into errors variable and then check if we have any errors
 
+,(req,res,next)=>{
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    console.log(errors);
+    return;
+  }
+  res.send('OK!')
+}
 
+26) to use password encryption and hashing, we use bcrypt 
+=> npm install --save bcrypt
 
+27) require bcrypt in user.js schema in model folder 
 
+28) we create a function to a hash passwords 
 
+userSchema.methods.hashPassword = function(password){
+    return bcrypt.hashSync(password,bcrypt.genSaltSync(5),null);
+}
 
-
+29) inside the callback function in users.js, we use an instance of the user DB and save our post req values 
+const user = new User ({
+    email: req.body.email,
+    password: new User().hashPassword(req.body.password)
+  })
+  user.save((error,doc)=>{
+    if(error){
+      console.log(error);
+    }
+      console.log('doc:'+doc);
+      res.redirect('/');
+    
+  })
 
 
 
