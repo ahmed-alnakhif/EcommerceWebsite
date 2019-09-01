@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //connect to mongoDB
-mongoose.connect('mongodb://localhost/ECommerce',{seNewUrlParser:true},(error)=>{
+mongoose.connect('mongodb://localhost/ECommerce',{useNewUrlParser:true},(error)=>{
   if(error){
     console.log(error)
   }

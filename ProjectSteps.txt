@@ -60,6 +60,15 @@ then fill the db manually
 const Product = require('../models/Product') 
 
 
+User Sign up & Auth
+
+19) create schema for user inside models folder 
+
+20) create user folder inside views and add signup.hbs page  
+
+21) inside route folder and users.js, add your routing for any CRUD method 
+
+
 
 
 

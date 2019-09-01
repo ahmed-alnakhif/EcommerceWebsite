@@ -6,6 +6,7 @@ const Product = require('../models/product');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  
   let productArray = [];
   Product.find({},(error,doc)=>{
     if(error){
