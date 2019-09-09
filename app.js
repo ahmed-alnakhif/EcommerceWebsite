@@ -5,22 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const expressHbs = require('express-handlebars');
-
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-
-// view engine setup
-app.engine('.hbs',expressHbs({defaultLayout:'layout.hbs',extname:'.hbs'}))
-app.set('view engine', 'hbs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 //connect to mongoDB
 mongoose.connect('mongodb://localhost/ECommerce',{useNewUrlParser:true},(error)=>{
@@ -31,6 +23,36 @@ mongoose.connect('mongodb://localhost/ECommerce',{useNewUrlParser:true},(error)=
     console.log('connected to Database')
   }
 })
+
+//go to passport.js file and run it
+require('./config/passport');
+
+// view engine setup
+app.engine('.hbs',expressHbs({defaultLayout:'layout.hbs',extname:'.hbs'}))
+app.set('view engine', 'hbs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+//sessions
+app.use(session({
+  secret: 'Ecommerce',
+  saveUninitialized: false,
+  resave: true,
+}))
+
+//flash
+app.use(flash());
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

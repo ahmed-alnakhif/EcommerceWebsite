@@ -114,6 +114,69 @@ const user = new User ({
   })
 
 
+30) to make sure that users can sign up with one email, we compare the sign up email with any same email in db. 
+
+User.findOne({ email: req.body.email }, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        if (result) {
+          console.log('this email is used!');
+          res.redirect("/users/signup");
+        } else {
+          user.save((error, doc) => {
+            if (error) {
+              console.log(error);
+            }
+            console.log("doc:" + doc);
+            res.redirect("/");
+          });
+        }
+      }
+    });
+
+
+31) to use express session => npm install --save express-session 
+then require session in app.js and under cookies parser we call sessions 
+=>
+app.use(session({
+  secret: 'Ecommerce',
+  saveUninitialized: false,
+  resave: false,
+}))
+
+
+32) for sessions and authentication we use connect flash to pass errors through sessions 
+=> npm install --save connect-flash
+we then require it in app.js
+
+33) we add errors using flash 
+
+
+34) create a signin.hbs page inside user folder
+
+35) create a get router for signin page in users.js
+
+
+36) we use passport.js for signing in authentication 
+=> npm install --save passport 
+=> require passport in app.js and then under sessions => app.use(passport.session());
+
+
+37) require passport in users.js
+
+38) install passport strategy you want 
+=> npm install --save passport-local 
+
+39) in post method, use passport.authentication with the strategy 
+
+
+
+
+
+
+
+
 
 
 
